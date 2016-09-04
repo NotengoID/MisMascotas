@@ -10,14 +10,14 @@
         layout="@layout/actionbar">
     </include>
 
-    <Button
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ver Favoritos"
         android:id="@+id/btnSiguiente"
         android:layout_below="@+id/miActionBar"
         android:onClick="irSegundaActividad"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" />-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvMascotas"
@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:padding="@dimen/activity_horizontal_margin"
-        android:layout_below="@id/btnSiguiente"/>
+        android:layout_below="@id/miActionBar"/>
 
 
 </RelativeLayout>
