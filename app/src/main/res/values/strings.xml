@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MisMascotas</string>
+    <string name="pnombre">nombre</string>
+    <string name="pemail">email</string>
+</resources>
