@@ -5,9 +5,15 @@
     <item
         android:id="@+id/mFavoritos"
         android:title="@string/menuFavoritos"
-        android:orderInCategory="100"
+        android:orderInCategory="90"
         app:showAsAction="always"
-        android:icon="@drawable/star"
+        android:icon="@drawable/ic_star"
         >
     </item>
+    <item android:id="@+id/mContacto"
+        android:title="@string/menuContacto"
+        android:orderInCategory="100"></item>
+    <item android:id="@+id/mAcerca"
+        android:title="@string/menuAcerca"
+        android:orderInCategory="101"></item>
 </menu>

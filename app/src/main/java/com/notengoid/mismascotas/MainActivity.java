@@ -1,81 +1,94 @@
 package com.notengoid.mismascotas;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.notengoid.mismascotas.adapter.MascotaAdaptador;
+import com.notengoid.mismascotas.adapter.PageAdapter;
+import com.notengoid.mismascotas.fragment.PerfilFragment;
+import com.notengoid.mismascotas.fragment.RecyclerViewFragment;
+import com.notengoid.mismascotas.pojo.Mascota;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Mascota> mascotas;
-    private RecyclerView lstMascotas;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar miActionBar =  (Toolbar) findViewById(R.id.miActionBar);
-        setSupportActionBar(miActionBar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        setUpViewPager();
 
-        lstMascotas = (RecyclerView) findViewById(R.id.rvMascotas);
-
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-
-        lstMascotas.setLayoutManager(llm);
-        inicializarListaContactos();
-        inicializarAdaptador();
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+        }
     }
-
-    public void irSegundaActividad(View v){
-        Intent intent = new Intent(this, FavoritosActivity.class);
-        startActivity(intent);
-    }
-
-    public void inicializarListaContactos(){
-        mascotas = new ArrayList<Mascota>();
-
-        mascotas.add(new Mascota(R.drawable.perro1,"Juan"));
-        mascotas.add(new Mascota(R.drawable.perro2,"Andres"));
-        mascotas.add(new Mascota(R.drawable.perro3,"Miriam"));
-        mascotas.add(new Mascota(R.drawable.arana,"Roberto"));
-        mascotas.add(new Mascota(R.drawable.canario,"Luis"));
-        mascotas.add(new Mascota(R.drawable.cerdo,"Diana"));
-        mascotas.add(new Mascota(R.drawable.conejo,"Jose"));
-        mascotas.add(new Mascota(R.drawable.gato,"Henry"));
-        mascotas.add(new Mascota(R.drawable.pez,"Juana"));
-        mascotas.add(new Mascota(R.drawable.tortuga,"Carlos"));
-
-    }
-
-    public void inicializarAdaptador(){
-        MascotaAdaptador adaptador = new MascotaAdaptador(mascotas,this);
-        lstMascotas.setAdapter(adaptador);
-    };
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_opciones, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = null;
+
         switch (item.getItemId()){
-            case R.id.mFavoritos:
-                Intent intent = new Intent(this, FavoritosActivity.class);
+            case R.id.mContacto:
+                intent = new Intent(this, ContactoActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.mAcerca:
+                intent = new Intent(this, AcercaActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.mFavoritos:
+                intent = new Intent(this, FavoritosActivity.class);
+                startActivity(intent);
+                break;
+
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private List<Fragment> agregarFragments(){
+        Log.e("MainActivity", "agregarFragments");
+        List<Fragment> fragments = new ArrayList<>();
+
+        fragments.add(new RecyclerViewFragment());
+        fragments.add(new PerfilFragment());
+
+        return fragments;
+    }
+
+    private void setUpViewPager(){
+        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), agregarFragments()));
+        tabLayout.setupWithViewPager(viewPager);
+
+        Log.e("MainActivity", "la ctd" + tabLayout.getTabCount());
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_home);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_detail);
     }
 }

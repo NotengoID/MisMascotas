@@ -1,4 +1,4 @@
-package com.notengoid.mismascotas;
+package com.notengoid.mismascotas.pojo;
 
 /**
  * Created by Asus on 4/09/2016.

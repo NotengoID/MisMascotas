@@ -6,6 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.notengoid.mismascotas.adapter.MascotaAdaptador;
+import com.notengoid.mismascotas.pojo.Mascota;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +21,10 @@ public class FavoritosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoritos);
 
-        Toolbar miActionBar =  (Toolbar) findViewById(R.id.miActionBar);
-        setSupportActionBar(miActionBar);
+        //Toolbar miActionBar =  (Toolbar) findViewById(R.id.miActionBar);
+        //setSupportActionBar(miActionBar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         lstMascotas = (RecyclerView) findViewById(R.id.rvFavMascotas);
 

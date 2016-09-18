@@ -3,4 +3,11 @@
     <string name="pnombre">nombre</string>
     <string name="pemail">email</string>
     <string name="menuFavoritos">Favoritos</string>
+    <string name="menuContacto">Contacto</string>
+    <string name="menuAcerca">Acerca de</string>
+    <string name="AcercaBio">Holas soy Tomás, un programador feliz.</string>
+    <string name="enviarComentario">Enviar Comentario</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
