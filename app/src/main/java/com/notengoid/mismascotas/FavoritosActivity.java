@@ -8,20 +8,22 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.notengoid.mismascotas.adapter.MascotaAdaptador;
+import com.notengoid.mismascotas.adapter.MascotaFavoritaAdaptador;
 import com.notengoid.mismascotas.model.Mascota;
+import com.notengoid.mismascotas.presentador.IRVFavoritosPresenter;
 import com.notengoid.mismascotas.presentador.IRecylerViewFragmentPresenter;
 import com.notengoid.mismascotas.presentador.RVFavoritosPresenter;
 import com.notengoid.mismascotas.presentador.RecyclerViewFragmentPresenter;
+import com.notengoid.mismascotas.vista.fragment.IRVFavoritosView;
 import com.notengoid.mismascotas.vista.fragment.IRecyclerViewFragmentView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoritosActivity extends AppCompatActivity implements IRecyclerViewFragmentView {
-    List<Mascota> mascotas;
-    private Activity activity;
+public class FavoritosActivity extends AppCompatActivity implements IRVFavoritosView {
+
     private RecyclerView rvFavMascotas;
-    private IRecylerViewFragmentPresenter presenter;
+    private IRVFavoritosPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +34,8 @@ public class FavoritosActivity extends AppCompatActivity implements IRecyclerVie
         setSupportActionBar(miActionBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        activity = this;
         rvFavMascotas = (RecyclerView) findViewById(R.id.rvFavMascotas);
-        presenter = new RecyclerViewFragmentPresenter(this, this.getApplicationContext());
+        presenter = new RVFavoritosPresenter(this, this);
 
 
         /*lstMascotas = (RecyclerView) findViewById(R.id.rvFavMascotas);
@@ -65,19 +66,19 @@ public class FavoritosActivity extends AppCompatActivity implements IRecyclerVie
 
     @Override
     public void generarLinearLayoutVertical() {
-        LinearLayoutManager llm = new LinearLayoutManager(activity);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvFavMascotas.setLayoutManager(llm);
     }
 
     @Override
-    public MascotaAdaptador crearAdaptador(ArrayList<Mascota> contactos) {
-        MascotaAdaptador adaptador = new MascotaAdaptador(mascotas, activity);
+    public MascotaFavoritaAdaptador crearAdaptador(ArrayList<Mascota> mascotas) {
+        MascotaFavoritaAdaptador adaptador = new MascotaFavoritaAdaptador(mascotas, this);
         return adaptador;
     }
 
     @Override
-    public void inicializarAdaptadorRV(MascotaAdaptador adaptador) {
+    public void inicializarAdaptadorRV(MascotaFavoritaAdaptador adaptador) {
         rvFavMascotas.setAdapter(adaptador);
     }
 }

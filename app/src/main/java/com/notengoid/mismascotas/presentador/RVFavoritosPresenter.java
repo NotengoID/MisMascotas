@@ -5,35 +5,35 @@ import android.util.Log;
 
 import com.notengoid.mismascotas.model.ConstructorMascotas;
 import com.notengoid.mismascotas.model.Mascota;
+import com.notengoid.mismascotas.vista.fragment.IRVFavoritosView;
 import com.notengoid.mismascotas.vista.fragment.IRecyclerViewFragmentView;
 
 import java.util.ArrayList;
 
-public class RVFavoritosPresenter implements IRecylerViewFragmentPresenter {
+public class RVFavoritosPresenter implements IRVFavoritosPresenter {
 
-    private IRecyclerViewFragmentView iRecyclerViewFragmentView;
+    private IRVFavoritosView iRecyclerViewFragmentView;
     private Context context;
     private ConstructorMascotas constructorMascotas;
     private ArrayList<Mascota> mascotas;
 
-    public RVFavoritosPresenter(IRecyclerViewFragmentView iRecyclerViewFragmentView, Context context) {
+    public RVFavoritosPresenter(IRVFavoritosView iRecyclerViewFragmentView, Context context) {
         this.iRecyclerViewFragmentView = iRecyclerViewFragmentView;
         this.context = context;
-        Log.e("RVFavoritosPresenter", "cargarMascotas");
-        obtenerMascotas();
-        Log.e("RVFavoritosPresenter", "cargoMascotas" + mascotas.size());
+        obtenerMascotasFavoritas();
     }
 
     @Override
-    public void obtenerMascotas() {
+    public void obtenerMascotasFavoritas() {
         constructorMascotas = new ConstructorMascotas(context);
         mascotas = constructorMascotas.obtenerTop5Mascotas();
-        mostrarMascotasRV();
+        mostrarMascotasFavoritasRV();
     }
 
 
     @Override
-    public void mostrarMascotasRV() {
+    public void mostrarMascotasFavoritasRV() {
+        Log.e("RVFavoritosPresenter", "mascotas: " + mascotas.size());
         iRecyclerViewFragmentView.inicializarAdaptadorRV(iRecyclerViewFragmentView.crearAdaptador(mascotas));
         iRecyclerViewFragmentView.generarLinearLayoutVertical();
     }

@@ -124,11 +124,13 @@ public class BaseDatos extends SQLiteOpenHelper {
     public ArrayList<Mascota> obtenerTop5Mascotas() {
         ArrayList<Mascota> mascotas = new ArrayList<>();
 
-        String query = "SELECT m.* " +
+        String query = "SELECT m.*, COUNT(ml." + ConstantesBaseDatos.TABLA_LIKESMASCOTA_NUMERO_LIKES +  ") "+
                         "FROM " + ConstantesBaseDatos.TABLA_MASCOTA + " as m, " +
                                 ConstantesBaseDatos.TABLA_LIKESMASCOTA + " as ml " +
                         "WHERE ml." + ConstantesBaseDatos.TABLA_LIKESMASCOTA_ID_MASCOTA + " = m." + ConstantesBaseDatos.TABLA_MASCOTA_ID + " " +
-                        "ORDER BY ml." + ConstantesBaseDatos.TABLA_LIKESMASCOTA_NUMERO_LIKES + " DESC LIMIT 5";
+                        "GROUP BY m." + ConstantesBaseDatos.TABLA_MASCOTA_ID + " " +
+                        "ORDER BY COUNT(ml." + ConstantesBaseDatos.TABLA_LIKESMASCOTA_NUMERO_LIKES + ") DESC LIMIT 5";
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor registros = db.rawQuery(query, null);
@@ -138,20 +140,8 @@ public class BaseDatos extends SQLiteOpenHelper {
             mascotaActual.setId(registros.getInt(0));
             mascotaActual.setNombre(registros.getString(1));
             mascotaActual.setFoto(registros.getInt(2));
-
-            String queryLikes = "SELECT COUNT("+ConstantesBaseDatos.TABLA_LIKESMASCOTA_NUMERO_LIKES+") as likes " +
-                    " FROM " + ConstantesBaseDatos.TABLA_LIKESMASCOTA +
-                    " WHERE " + ConstantesBaseDatos.TABLA_LIKESMASCOTA_ID_MASCOTA + "=" + mascotaActual.getId();
-
-            Cursor registrosLikes = db.rawQuery(queryLikes, null);
-            if (registrosLikes.moveToNext()){
-                mascotaActual.setLikes(registrosLikes.getInt(0));
-            }else {
-                mascotaActual.setLikes(0);
-            }
-
+            mascotaActual.setLikes(registros.getInt(3));
             mascotas.add(mascotaActual);
-
         }
 
         db.close();
