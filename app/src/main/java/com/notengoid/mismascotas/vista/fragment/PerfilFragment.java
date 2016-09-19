@@ -1,4 +1,4 @@
-package com.notengoid.mismascotas.fragment;
+package com.notengoid.mismascotas.vista.fragment;
 
 
 import android.os.Bundle;
@@ -10,9 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.notengoid.mismascotas.R;
-import com.notengoid.mismascotas.adapter.MascotaAdaptador;
 import com.notengoid.mismascotas.adapter.PerfilAdaptador;
-import com.notengoid.mismascotas.pojo.Mascota;
+import com.notengoid.mismascotas.model.Mascota;
 
 import java.util.ArrayList;
 

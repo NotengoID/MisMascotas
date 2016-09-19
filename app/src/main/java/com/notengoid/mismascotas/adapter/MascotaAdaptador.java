@@ -2,6 +2,7 @@ package com.notengoid.mismascotas.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.notengoid.mismascotas.pojo.Mascota;
+import com.notengoid.mismascotas.model.ConstructorMascotas;
+import com.notengoid.mismascotas.model.Mascota;
 import com.notengoid.mismascotas.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.v7.widget.RecyclerView.*;
@@ -27,6 +30,10 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
     public MascotaAdaptador(List<Mascota> mascotas, Activity activity){
         this.mascotas = mascotas;
         this.activity = activity;
+
+        if(mascotas == null){
+            this.mascotas = new ArrayList<>();
+        }
     }
 
     public static class MascotaViewHolder extends ViewHolder{
@@ -64,6 +71,11 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
             public void onClick(View v) {
                 mascota.setLikes(mascota.getLikes()+1);
                 holder.tvLikesCV.setText("" + mascota.getLikes());
+
+                ConstructorMascotas constructorMascotas = new ConstructorMascotas(activity);
+                constructorMascotas.darLikeMascota(mascota);
+                int ctd = constructorMascotas.obtenerLikesMascota(mascota);
+                holder.tvLikesCV.setText("" + ctd);
             }
         });
     }

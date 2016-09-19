@@ -6,19 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.notengoid.mismascotas.adapter.MascotaAdaptador;
 import com.notengoid.mismascotas.adapter.PageAdapter;
-import com.notengoid.mismascotas.fragment.PerfilFragment;
-import com.notengoid.mismascotas.fragment.RecyclerViewFragment;
-import com.notengoid.mismascotas.pojo.Mascota;
+import com.notengoid.mismascotas.vista.fragment.PerfilFragment;
+import com.notengoid.mismascotas.vista.fragment.RecyclerViewFragment;
 
 import java.util.ArrayList;
 import java.util.List;

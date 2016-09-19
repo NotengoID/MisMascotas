@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.notengoid.mismascotas.R;
-import com.notengoid.mismascotas.pojo.Mascota;
+import com.notengoid.mismascotas.model.Mascota;
 
 import java.util.List;
 

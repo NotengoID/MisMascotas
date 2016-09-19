@@ -1,4 +1,4 @@
-package com.notengoid.mismascotas.fragment;
+package com.notengoid.mismascotas.vista.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.notengoid.mismascotas.pojo.Mascota;
+import com.notengoid.mismascotas.model.Mascota;
 import com.notengoid.mismascotas.adapter.MascotaAdaptador;
 import com.notengoid.mismascotas.R;
+import com.notengoid.mismascotas.presentador.IRecylerViewFragmentPresenter;
+import com.notengoid.mismascotas.presentador.RecyclerViewFragmentPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +21,18 @@ import java.util.List;
 /**
  * Created by Asus on 11/09/2016.
  */
-public class RecyclerViewFragment extends Fragment {
+public class RecyclerViewFragment extends Fragment implements IRecyclerViewFragmentView{
     List<Mascota> mascotas;
-    private RecyclerView listaContactos;
+    private RecyclerView rvMascotas;
     MascotaAdaptador adaptador;
-
+    private IRecylerViewFragmentPresenter presenter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
-        listaContactos = (RecyclerView) v.findViewById(R.id.rvMascotas);
+        /*listaContactos = (RecyclerView) v.findViewById(R.id.rvMascotas);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -39,11 +41,15 @@ public class RecyclerViewFragment extends Fragment {
 
         listaContactos.setLayoutManager(llm);
         inicializarListaContactos();
-        inicializarAdaptador();
+        inicializarAdaptador();*/
+
+        rvMascotas = (RecyclerView) v.findViewById(R.id.rvMascotas);
+        presenter = new RecyclerViewFragmentPresenter(this, getContext());
+
         return v;
     }
 
-    public void inicializarListaContactos(){
+    /*public void inicializarListaContactos(){
         mascotas = new ArrayList<Mascota>();
 
         mascotas.add(new Mascota(R.drawable.perro1,"Juan"));
@@ -61,6 +67,24 @@ public class RecyclerViewFragment extends Fragment {
 
     public void inicializarAdaptador(){
         adaptador = new MascotaAdaptador(mascotas,getActivity());
-        listaContactos.setAdapter(adaptador);
-    };
+        rvMascotas.setAdapter(adaptador);
+    };*/
+
+    @Override
+    public void generarLinearLayoutVertical() {
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        rvMascotas.setLayoutManager(llm);
+    }
+
+    @Override
+    public MascotaAdaptador crearAdaptador(ArrayList<Mascota> mascotas) {
+        MascotaAdaptador adaptador = new MascotaAdaptador(mascotas, getActivity());
+        return adaptador;
+    }
+
+    @Override
+    public void inicializarAdaptadorRV(MascotaAdaptador adaptador) {
+        rvMascotas.setAdapter(adaptador);
+    }
 }

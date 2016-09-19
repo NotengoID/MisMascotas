@@ -1,12 +1,15 @@
-package com.notengoid.mismascotas.pojo;
+package com.notengoid.mismascotas.model;
 
 /**
  * Created by Asus on 4/09/2016.
  */
 public class Mascota {
+    private int id;
     private String nombre;
     private int foto;
     private int likes;
+
+    public Mascota(){}
 
     public Mascota(int foto, String nombre, int likes){
         this.foto = foto;
@@ -42,5 +45,13 @@ public class Mascota {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
