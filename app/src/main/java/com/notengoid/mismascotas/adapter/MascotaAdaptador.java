@@ -1,8 +1,8 @@
 package com.notengoid.mismascotas.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.notengoid.mismascotas.model.ConstructorMascotas;
 import com.notengoid.mismascotas.model.Mascota;
 import com.notengoid.mismascotas.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,45 +40,36 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
     public static class MascotaViewHolder extends ViewHolder{
 
         private ImageView imgFoto;
-        private TextView tvNombreCV;
-        private TextView tvLikesCV;
-        private ImageButton btnLike;
+        private TextView tvLikes;
 
         public MascotaViewHolder(View itemView) {
             super(itemView);
-
             imgFoto = (ImageView) itemView.findViewById(R.id.imgFoto);
-            tvNombreCV = (TextView) itemView.findViewById(R.id.tvNombreCV);
-            tvLikesCV = (TextView) itemView.findViewById(R.id.tvLikesCV);
-            btnLike = (ImageButton) itemView.findViewById(R.id.btnLike);
+            tvLikes = (TextView) itemView.findViewById(R.id.tvLikes);
         }
     }
 
     @Override
     public MascotaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_mascota,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_grid_mascota,parent,false);
         return new MascotaViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(final MascotaViewHolder holder, final int position) {
         final Mascota mascota = mascotas.get(position);
-        holder.imgFoto.setImageResource(mascota.getFoto());
-        holder.tvNombreCV.setText(mascota.getNombre());
-        holder.tvLikesCV.setText("" + mascota.getLikes());
+        Picasso.with(activity)
+                .load(mascota.getUrlFoto())
+                .placeholder(R.drawable.shock_rave_bonus_icon)
+                .into(holder.imgFoto);
+        holder.tvLikes.setText("" + mascota.getLikes());
 
-        holder.btnLike.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                mascota.setLikes(mascota.getLikes()+1);
-                holder.tvLikesCV.setText("" + mascota.getLikes());
-
-                ConstructorMascotas constructorMascotas = new ConstructorMascotas(activity);
-                constructorMascotas.darLikeMascota(mascota);
-                int ctd = constructorMascotas.obtenerLikesMascota(mascota);
-                holder.tvLikesCV.setText("" + ctd);
-            }
-        });
+        //holder.imgFoto.setOnClickListener((v)-> {
+            //Intent intent = new Intent(activity, DetalleMascota.class);
+            //intent.putExtra("url", mascota.getUrlFoto());
+            //intent.putExtra("like", mascota.getLikes());
+            //activity.startActivity(intent);
+        //});
     }
 
     @Override

@@ -5,9 +5,12 @@
     <string name="menuFavoritos">Favoritos</string>
     <string name="menuContacto">Contacto</string>
     <string name="menuAcerca">Acerca de</string>
+    <string name="menuConfigurar">Configurar Cuenta</string>
+    <string name="guardarConfigurar">Guardar Cuenta</string>
     <string name="AcercaBio">Holas soy Tomás, un programador feliz.</string>
     <string name="enviarComentario">Enviar Comentario</string>
     <string name="likes">Likes</string>
+    <string name="tituloConfiguracion">Petagram</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

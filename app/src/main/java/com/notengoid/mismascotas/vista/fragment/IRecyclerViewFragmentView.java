@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public interface IRecyclerViewFragmentView {
 
     public void generarLinearLayoutVertical();
-
+    public void generarGridLayout();
     public MascotaAdaptador crearAdaptador(ArrayList<Mascota> contactos);
 
     public void inicializarAdaptadorRV(MascotaAdaptador adaptador);

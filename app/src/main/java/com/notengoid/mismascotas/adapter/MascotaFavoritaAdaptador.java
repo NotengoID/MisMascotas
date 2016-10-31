@@ -5,20 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.notengoid.mismascotas.R;
-import com.notengoid.mismascotas.model.ConstructorMascotas;
 import com.notengoid.mismascotas.model.Mascota;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.v7.widget.RecyclerView.Adapter;
-import static android.support.v7.widget.RecyclerView.OnClickListener;
-import static android.support.v7.widget.RecyclerView.ViewHolder;
 
 /**
  * Created by Asus on 3/09/2016.
@@ -56,8 +52,11 @@ public class MascotaFavoritaAdaptador extends Adapter<MascotaFavoritaAdaptador.M
     @Override
     public void onBindViewHolder(final MascotaFavoritaViewHolder holder, final int position) {
         final Mascota mascota = mascotas.get(position);
-        holder.imgFotoCVFav.setImageResource(mascota.getFoto());
-        holder.tvNombreCVFav.setText(mascota.getNombre());
+        Picasso.with(activity)
+                .load(mascota.getUrlFoto())
+                .placeholder(R.drawable.shock_rave_bonus_icon)
+                .into(holder.imgFotoCVFav);
+        holder.tvNombreCVFav.setText(mascota.getNombreCompleto());
         holder.tvLikesCVFav.setText("" + mascota.getLikes());
     }
 

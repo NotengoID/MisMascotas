@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.notengoid.mismascotas.R;
 import com.notengoid.mismascotas.model.Mascota;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -54,7 +55,10 @@ public class PerfilAdaptador extends Adapter<PerfilAdaptador.MascotaViewHolder> 
     @Override
     public void onBindViewHolder(final MascotaViewHolder holder, final int position) {
         final Mascota mascota = mascotas.get(position);
-        holder.imgFoto.setImageResource(mascota.getFoto());
+        Picasso.with(activity)
+                .load(mascota.getUrlFoto())
+                .placeholder(R.drawable.shock_rave_bonus_icon)
+                .into(holder.imgFoto);
         holder.tvLikesCV.setText("" + mascota.getLikes());
 
         holder.btnLike.setOnClickListener(new OnClickListener(){

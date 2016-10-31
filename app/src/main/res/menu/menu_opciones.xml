@@ -14,6 +14,9 @@
         android:title="@string/menuContacto"
         android:orderInCategory="100"></item>
     <item android:id="@+id/mAcerca"
-        android:title="@string/menuAcerca"
-        android:orderInCategory="101"></item>
+    android:title="@string/menuAcerca"
+    android:orderInCategory="101"></item>
+    <item android:id="@+id/mConfigurar"
+        android:title="@string/menuConfigurar"
+        android:orderInCategory="102"></item>
 </menu>

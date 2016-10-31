@@ -62,7 +62,10 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, FavoritosActivity.class);
                 startActivity(intent);
                 break;
-
+            case R.id.mConfigurar:
+                intent = new Intent(this, ConfiguracionActivity.class);
+                startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

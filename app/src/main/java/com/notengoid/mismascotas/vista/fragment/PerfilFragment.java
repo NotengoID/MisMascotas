@@ -45,7 +45,7 @@ public class PerfilFragment extends Fragment {
 
     public void inicializarListaContactos(){
         mascotas = new ArrayList<Mascota>();
-
+        /*
         mascotas.add(new Mascota(R.drawable.perro1,"Juan"));
         mascotas.add(new Mascota(R.drawable.perro2,"Andres"));
         mascotas.add(new Mascota(R.drawable.perro3,"Miriam"));
@@ -56,7 +56,7 @@ public class PerfilFragment extends Fragment {
         mascotas.add(new Mascota(R.drawable.gato,"Henry"));
         mascotas.add(new Mascota(R.drawable.pez,"Juana"));
         mascotas.add(new Mascota(R.drawable.tortuga,"Carlos"));
-
+        */
     }
 
     public void inicializarAdaptador(){

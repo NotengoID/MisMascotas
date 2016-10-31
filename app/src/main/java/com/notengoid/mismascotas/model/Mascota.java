@@ -4,22 +4,22 @@ package com.notengoid.mismascotas.model;
  * Created by Asus on 4/09/2016.
  */
 public class Mascota {
-    private int id;
-    private String nombre;
-    private int foto;
-    private int likes;
+    private String id;
+    private String nombreCompleto;
+    private String urlFoto;
+    private int likes = 0;
 
     public Mascota(){}
 
-    public Mascota(int foto, String nombre, int likes){
-        this.foto = foto;
-        this.nombre = nombre;
+    public Mascota(String urlFoto, String nombreCompleto, int likes){
+        this.urlFoto = urlFoto;
+        this.nombreCompleto = nombreCompleto;
         this.likes = likes;
     }
 
-    public Mascota(int foto, String nombre){
-        this.foto = foto;
-        this.nombre = nombre;
+    public Mascota(String urlFoto, String nombreCompleto){
+        this.urlFoto = urlFoto;
+        this.nombreCompleto = nombreCompleto;
         this.likes = 0;
     }
 
@@ -31,27 +31,27 @@ public class Mascota {
         this.likes = likes;
     }
 
-    public int getFoto() {
-        return foto;
+    public String getUrlFoto() {
+        return urlFoto;
     }
 
-    public void setFoto(int foto) {
-        this.foto = foto;
+    public void setUrlFoto(String urlFoto) {
+        this.urlFoto = urlFoto;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreCompleto() {
+        return nombreCompleto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreCompleto(String nombreCompleto){
+        this.nombreCompleto = nombreCompleto;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 }
