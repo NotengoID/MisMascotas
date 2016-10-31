@@ -36,22 +36,27 @@ public class BaseDatos extends SQLiteOpenHelper {
                 "REFERENCES " + ConstantesBaseDatos.TABLA_MASCOTA + "(" + ConstantesBaseDatos.TABLA_MASCOTA_ID + ")" +
                 ")";
 
+        String queryCrearTablaConfiguracion = "CREATE TABLE " + ConstantesBaseDatos.TABLA_CONFIGURACION + "(" +
+                ConstantesBaseDatos.TABLA_CONFIGURACION_ID + " TEXT, " +
+                ConstantesBaseDatos.TABLA_CONFIGURACION_VALOR + " TEXT )";
+
         db.execSQL(queryCrearTablaContacto);
         db.execSQL(queryCrearTablaLikesContacto);
+        db.execSQL(queryCrearTablaConfiguracion);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXIST " + ConstantesBaseDatos.TABLA_MASCOTA);
         db.execSQL("DROP TABLE IF EXIST " + ConstantesBaseDatos.TABLA_LIKESMASCOTA);
+        db.execSQL("DROP TABLE IF EXIST " + ConstantesBaseDatos.TABLA_CONFIGURACION);
         onCreate(db);
     }
 
     public ArrayList<Mascota> obtenerTodasLasMascotas() {
         ArrayList<Mascota> mascotas = new ArrayList<>();
-
-
-
+        /*
         String query = "SELECT * FROM " + ConstantesBaseDatos.TABLA_MASCOTA ;
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -60,8 +65,8 @@ public class BaseDatos extends SQLiteOpenHelper {
         while (registros.moveToNext()){
             Mascota mascotaActual = new Mascota();
             mascotaActual.setId(registros.getInt(0));
-            mascotaActual.setNombre(registros.getString(1));
-            mascotaActual.setFoto(registros.getInt(2));
+            mascotaActual.setNombreCompleto(registros.getString(1));
+            mascotaActual.setUrlFoto(registros.getInt(2));
 
             String queryLikes = "SELECT COUNT("+ConstantesBaseDatos.TABLA_LIKESMASCOTA_NUMERO_LIKES+") as likes " +
                                 " FROM " + ConstantesBaseDatos.TABLA_LIKESMASCOTA +
@@ -79,7 +84,7 @@ public class BaseDatos extends SQLiteOpenHelper {
         }
 
         db.close();
-
+        */
         return mascotas;
     }
 
@@ -87,6 +92,29 @@ public class BaseDatos extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(ConstantesBaseDatos.TABLA_MASCOTA,null, contentValues);
         db.close();
+    }
+
+    public void updateMascota(ContentValues contentValues){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update(ConstantesBaseDatos.TABLA_MASCOTA,contentValues, null, null);
+        db.close();
+    }
+
+    public String obtenerMascota(){
+        String token = "";
+        String query = "SELECT " + ConstantesBaseDatos.TABLA_MASCOTA_NOMBRE +
+                " FROM " + ConstantesBaseDatos.TABLA_MASCOTA +
+                " WHERE " + ConstantesBaseDatos.TABLA_MASCOTA_ID + "= 1";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor registros = db.rawQuery(query, null);
+
+        if (registros.moveToNext()){
+            token = registros.getString(0);
+        }
+
+        db.close();
+        return token;
     }
 
     public void insertarLikeMascota(ContentValues contentValues){
@@ -118,12 +146,13 @@ public class BaseDatos extends SQLiteOpenHelper {
 
         db.delete(ConstantesBaseDatos.TABLA_LIKESMASCOTA,"",null);
         db.delete(ConstantesBaseDatos.TABLA_MASCOTA, "",null);
+        db.delete(ConstantesBaseDatos.TABLA_CONFIGURACION, "",null);
         db.close();
     }
 
     public ArrayList<Mascota> obtenerTop5Mascotas() {
         ArrayList<Mascota> mascotas = new ArrayList<>();
-
+        /*
         String query = "SELECT m.*, COUNT(ml." + ConstantesBaseDatos.TABLA_LIKESMASCOTA_NUMERO_LIKES +  ") "+
                         "FROM " + ConstantesBaseDatos.TABLA_MASCOTA + " as m, " +
                                 ConstantesBaseDatos.TABLA_LIKESMASCOTA + " as ml " +
@@ -139,13 +168,19 @@ public class BaseDatos extends SQLiteOpenHelper {
             Mascota mascotaActual = new Mascota();
             mascotaActual.setId(registros.getInt(0));
             mascotaActual.setNombre(registros.getString(1));
-            mascotaActual.setFoto(registros.getInt(2));
+            mascotaActual.setUrlFoto(registros.getInt(2));
             mascotaActual.setLikes(registros.getInt(3));
             mascotas.add(mascotaActual);
         }
 
         db.close();
-
+        */
         return mascotas;
+    }
+
+    public void insertarCONFIGURACION(ContentValues contentValues){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(ConstantesBaseDatos.TABLA_CONFIGURACION,null, contentValues);
+        db.close();
     }
 }
